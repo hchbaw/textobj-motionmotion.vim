@@ -1,0 +1,86 @@
+*textobj-motionmotion.txt*	Text objects for bounds of 2 motions
+
+Author:  Takeshi Banse <takebi@laafc.net>
+Version: 0.0.1
+Licence: Public Domain
+
+CONTENTS				*textobj-motionmotion-contents*
+
+Introduction		|textobj-motionmotion-introduction|
+Interface		|textobj-motionmotion-interface|
+  Mappings		  |textobj-motionmotion-key-mappings|
+Customizing		|textobj-motionmotion-customizing|
+Bugs			|textobj-motionmotion-bugs|
+
+==============================================================================
+INTRODUCTION				 *textobj-motionmotion-introduction*
+
+*textobj-motionmotion* is a Vim plugin to provide text objets to select a
+piece of text bounded by the cursor positions of the following 2 motions.
+
+For example, an asterisk (*) is used to denote the cursor position:
+>
+  ./runtime/doc/mo*tion.txt
+<
+|<Plug>(textobj-motionmotion-i)3bt.| will select 'doc/motion' as follows:
+(here (^) indicates the selected texts)
+>
+  ./runtime/doc/mo*tion.txt
+            ^^^^^^^^^^^
+<
+Roughly speaking, this plugin makes an operator such that ["^x]c{motion} to
+be able to respond ["x]cim{motion}{motion} (*im* is the default key mapping).
+Hence the name "motionmotion" has been derived from.
+
+Note that this plugin is far from complete. Please use *[range]* or
+*Visual-mode* in the real world!
+
+Requirements:
+- Vim 7.2 or later
+- |textobj-user| 0.3.8 or later
+
+Latest version:
+https://github.com/hchbaw/textobj-motionmotion.vim
+
+==============================================================================
+INTERFACE				*textobj-motionmotion-interface*
+
+------------------------------------------------------------------------------
+KEY MPPINGS				*textobj-motionmotion-key-mappings*
+
+<Plug>(textobj-motionmotion-a)		*<Plug>(textobj-motionmotion-a)*
+			Select the piece of text bounded by the cursor
+			positions of the following 2 motion commands.
+			The second motion will be executed at the position as
+			the result of the first motion execution.
+
+<Plug>(textobj-motionmotion-i)		*<Plug>(textobj-motionmotion-i)*
+			Like |<Plug>(textobj-motionmotion-a)|, but the second
+			motion will be executed at the position before the
+			first motion execution.
+
+==============================================================================
+CUSTOMIZING				*textobj-motionmotion-customizing*
+
+This plugin will define the following key mappings in Visual mode and
+Operator-pending mode automatically.  If you don't want these key mappings,
+define |g:textobj_motionmotion_no_default_key_mappings| before this plugin is
+loaded (e.g. in your |vimrc|).  You can also use
+|:TextobjMotionmotionDefaultKeyMappings| to redefine these key mappings. This
+command doesn't override existing {lhs}s unless [!] is given.
+
+	{lhs}	{rhs}
+	-----	------------------------------~
+	am	<Plug>(textobj-motionmotion-a)
+	im	<Plug>(textobj-motionmotion-i)
+
+==============================================================================
+BUGS					*textobj-motionmotion-bugs*
+
+- Text objects, */* ,*?* ,*:* and *Q_ta* are not supported. Supposed to be
+  much more fetures missing.
+
+- No mapped commands are supported.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
