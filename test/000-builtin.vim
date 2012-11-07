@@ -26,12 +26,12 @@ endfunction
 " REDEFINED!
 function! s:loop(c, acc, m1, sk)
   return s:loopbuiltin(a:c, a:acc, a:m1,
-  \ function('s:t_motiongen'), function('s:t_nullmotionp'), a:sk)
+  \ function('s:t_nullmotionp'), function('s:t_motiongen'), a:sk)
 endfunction
 
 function! s:t_loopbuiltincall()
   return s:loopbuiltin(s:readchar(), '', '',
-  \ function('s:t_motiongen'), function('s:t_nullmotionp'),
+  \ function('s:t_nullmotionp'), function('s:t_motiongen'), 
   \ function('s:t_motionlist'))
 endfunction
 

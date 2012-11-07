@@ -16,7 +16,7 @@ endfunction
 
 function! s:loop(c, acc, m1, sk)
   return s:loopbuiltin(a:c, a:acc, a:m1,
-  \ function('s:builtinmotionfn'), function('s:nullmotionp'), a:sk)
+  \ function('s:nullmotionp'), function('s:builtinmotionfn'), a:sk)
 endfunction
 
 " basically just dumped out the quickref.txt
@@ -26,45 +26,45 @@ endfunction
 " TODO: :
 " TODO: less ugliness
 " XXX: make vim do this (some kind of g@), but I have no clue unfortunately.
-function! s:loopbuiltin(c, acc, m1, mgen, mpred, sk)
+function! s:loopbuiltin(c, acc, m1, mpred, genb, sk)
   " Q_lr
   if     a:acc == '' && (a:c ==# '0' || a:c ==# '^')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   " XXX: [count]
   elseif s:readcountp(a:acc) && s:readcountp(a:c)
     return s:loop(s:readchar(), a:acc . a:c, a:m1, a:sk)
   elseif a:acc =~# 'g$' &&
   \      (a:c ==# '0' || a:c ==# '^' || a:c ==# '$' || a:c ==# 'm')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif s:readcountp(a:acc) &&
   \      (a:c ==# 'h' || a:c ==# 'l' || a:c ==# '$' || a:c ==# '|' ||
   \       a:c ==# ';' || a:c ==# ',')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif s:readcountp(a:acc) &&
   \      (a:c ==# 'f' || a:c ==# 'F' || a:c ==# 't' || a:c ==# 'T')
-    return s:builtinmaybe(s:readchar(), a:acc.a:c, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(s:readchar(), a:acc.a:c, a:m1, a:mpred, a:genb, a:sk)
   " Q_ud
   elseif a:acc =~# 'g$' &&
   \      (a:c ==# 'g' || a:c ==# 'k' || a:c ==# 'j')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif s:readcountp(a:acc) &&
   \      (a:c ==# 'k' || a:c ==# 'j' || a:c ==# '-' || a:c ==# '+' ||
   \       a:c ==# '_' || a:c ==# 'G' || a:c ==# '%')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   " Q_tm
   elseif a:acc =~# 'g$' &&
   \      (a:c ==# 'e' || a:c ==# 'E')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif (a:acc =~# '\]$' || a:acc =~# '\[$') &&
   \      (a:c ==# ']' || a:c ==# '[' || a:c ==# '(' || a:c ==# '{' ||
   \       a:c ==# 'm' || a:c ==# 'M' || a:c ==# ')' || a:c ==# '}' ||
   \       a:c ==# '#' || a:c ==# '*')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif s:readcountp(a:acc) &&
   \      (a:c ==# 'w' || a:c ==# 'W' || a:c ==# 'e' || a:c ==# 'E' ||
   \       a:c ==# 'b' || a:c ==# 'B' || a:c ==# ')' || a:c ==# '(' ||
   \       a:c ==# '}' || a:c ==# '{')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   " g[]
   elseif s:readcountp(a:acc) &&
   \      (a:c ==# 'g' || a:c ==# ']' || a:c ==# '[')
@@ -73,26 +73,26 @@ function! s:loopbuiltin(c, acc, m1, mgen, mpred, sk)
   " TODO: /?
   elseif s:readcountp(a:acc) &&
   \      (a:c ==# 'n' || a:c ==# 'N' || a:c ==# '*' || a:c ==# '#')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif a:acc =~# 'g$' &&
   \      (a:c ==# '*' || a:c ==# '#' || a:c ==# 'd' || a:c ==# 'D')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   " Q_ma
   elseif a:acc == '' && (a:c ==# 'm' || a:c ==# '`' || a:c ==# "'")
     return s:loop(s:readchar(), a:acc . a:c, a:m1, a:sk)
   elseif a:acc ==# 'm' && a:c =~# '[a-zA-Z]'
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif a:acc =~# "[`']$" && a:c =~# "[a-zA-Z0-9\\]\[`'\"\<\>.]"
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif s:readcountp(a:acc) && (a:c == "\<C-o>" || a:c == "\<C-i>")
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   " Q_vm
   elseif a:acc == '' && (a:c == '%' || a:c == 'M')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif s:readcountp(a:acc) && (a:c ==# 'H' || a:c == 'L')
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   elseif a:acc =~# 'g$' && a:c ==# 'o'
-    return s:builtinmaybe(a:c, a:acc, a:m1, a:mgen, a:mpred, a:sk)
+    return s:builtinmaybe(a:c, a:acc, a:m1, a:mpred, a:genb, a:sk)
   " Q_ta
   " XXX: Does it make sense?
   endif
@@ -102,11 +102,11 @@ function! s:nullmotionp(motionish)
   return type(a:motionish) != 2
 endfunction
 
-function! s:builtinmaybe(c, acc, m1, mgen, mpred, sk)
+function! s:builtinmaybe(c, acc, m1, mpred, genb, sk)
   if a:mpred(a:m1)
-    return s:loop(s:readchar(), '', a:mgen(a:acc . a:c, 1), a:sk)
+    return s:loop(s:readchar(), '', a:genb(a:acc . a:c, 1), a:sk)
   else
-    return a:sk(a:m1, a:mgen(a:acc . a:c, 2))
+    return a:sk(a:m1, a:genb(a:acc . a:c, 2))
   endif
 endfunction
 
