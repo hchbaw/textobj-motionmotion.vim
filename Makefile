@@ -16,7 +16,7 @@ $(G): $(S)
 	mkdir -p $(D)
 	gosh $(S) > $@
 
-$(R): $(SOURCES) test/000-internal.vim $(G)
+$(R): $(SOURCES) test/000-builtin.vim $(G)
 	cat $^ > $@
 
 test: $(R)
