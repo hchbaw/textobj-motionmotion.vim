@@ -2,13 +2,13 @@
 (use util.match)
 
 (define (%print-count-testloop-calls hi lo)
-  (print #`"call s:testloop(\",|hi|,|lo|\", \",|hi|\", \",|lo|\")")
-  (print #`"call s:testloop(\",|hi|20,|lo|\", \",|hi|\", \"20,|lo|\")")
-  (print #`"call s:testloop(\"20,|hi|,|lo|\", \"20,|hi|\", \",|lo|\")")
-  (print #`"call s:testloop(\"20,|hi|20,|lo|\", \"20,|hi|\", \"20,|lo|\")"))
+  (print #`"call s:testloopbuiltin(\",|hi|,|lo|\", \",|hi|\", \",|lo|\")")
+  (print #`"call s:testloopbuiltin(\",|hi|20,|lo|\", \",|hi|\", \"20,|lo|\")")
+  (print #`"call s:testloopbuiltin(\"20,|hi|,|lo|\", \"20,|hi|\", \",|lo|\")")
+  (print #`"call s:testloopbuiltin(\"20,|hi|20,|lo|\", \"20,|hi|\", \"20,|lo|\")"))
 
 (define (%print-testloop-calls hi lo)
-  (print #`"call s:testloop(\",|hi|,|lo|\", \",|hi|\", \",|lo|\")"))
+  (print #`"call s:testloopbuiltin(\",|hi|,|lo|\", \",|hi|\", \",|lo|\")"))
 
 (define string-commandsify (cut string-split <> #/\s+/))
 (define commands-stringify (cut string-join <> " "))
