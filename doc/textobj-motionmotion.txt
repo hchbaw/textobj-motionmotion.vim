@@ -1,7 +1,7 @@
 *textobj-motionmotion.txt*	Text objects for bounds of 2 motions
 
 Author:  Takeshi Banse <takebi@laafc.net>
-Version: 0.0.1
+Version: 0.0.2
 Licence: Public Domain
 
 CONTENTS				*textobj-motionmotion-contents*
