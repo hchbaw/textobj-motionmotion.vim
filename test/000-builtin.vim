@@ -15,8 +15,12 @@ function! s:t_motionlist(m1, m2)
   return [a:m1, a:m2]
 endfunction
 
-function! s:t_motiongen(motionstr, firstorsecond)
-  return a:motionstr
+function! s:t_builtinmotiongen(keyseq, firstorsecond)
+  return a:keyseq
+endfunction
+
+function! s:t_builtintextobjectsgen(keyseq, firstorsecond)
+  return a:keyseq
 endfunction
 
 function! s:t_nullmotionp(motionish)
@@ -26,12 +30,16 @@ endfunction
 " REDEFINED!
 function! s:loop(c, acc, m1, sk)
   return s:loopbuiltin(a:c, a:acc, a:m1,
-  \ function('s:t_nullmotionp'), function('s:t_motiongen'), a:sk)
+  \ function('s:t_nullmotionp'),
+  \ function('s:t_builtinmotiongen'),
+  \ function('s:t_builtintextobjectsgen'), a:sk)
 endfunction
 
 function! s:t_loopbuiltincall()
   return s:loopbuiltin(s:readchar(), '', '',
-  \ function('s:t_nullmotionp'), function('s:t_motiongen'), 
+  \ function('s:t_nullmotionp'),
+  \ function('s:t_builtinmotiongen'),
+  \ function('s:t_builtintextobjectsgen'),
   \ function('s:t_motionlist'))
 endfunction
 

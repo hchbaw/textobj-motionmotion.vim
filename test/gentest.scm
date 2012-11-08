@@ -47,3 +47,8 @@
 (print-count-testloop-calls values "\\<c-o> \\<c-i>")
 (print-testloop-calls values "% M")
 (print-count-testloop-calls values "H L go")
+(let ((ms (string-commandsify "w W s p ] [ ) ( b > < t } {  B \" ' `"))
+      (prs (.$ (pa$ print-testloop-calls (pa$ scat "g@"))
+               commands-stringify)))
+  (prs (map (pa$ scat "a") ms))
+  (prs (map (pa$ scat "i") ms)))

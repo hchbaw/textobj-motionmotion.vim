@@ -7,6 +7,7 @@ Licence: Public Domain
 CONTENTS				*textobj-motionmotion-contents*
 
 Introduction		|textobj-motionmotion-introduction|
+Usage 			|textobj-motionmotion-usage|
 Interface		|textobj-motionmotion-interface|
   Mappings		  |textobj-motionmotion-key-mappings|
 Customizing		|textobj-motionmotion-customizing|
@@ -22,11 +23,11 @@ For example, an asterisk (*) is used to denote the cursor position:
 >
   ./runtime/doc/mo*tion.txt
 <
-|<Plug>(textobj-motionmotion-i)3bt.| will select 'doc/motion' as follows:
+"vim3bt." will select 'doc/motion' as follows:
 (here (^) indicates the selected texts)
 >
-  ./runtime/doc/mo*tion.txt
-            ^^^^^^^^^^^
+  ./runtime/doc/motion.txt
+            ^^^^^^^^^^
 <
 Roughly speaking, this plugin makes an operator such that ["^x]c{motion} to
 be able to respond ["x]cim{motion}{motion} (*im* is the default key mapping).
@@ -41,6 +42,32 @@ Requirements:
 
 Latest version:
 https://github.com/hchbaw/textobj-motionmotion.vim
+
+==============================================================================
+USAGE					*textobj-motionmotion-usage*
+
+Note on text-objects.
+
+Builtin text-objects are supported. Note that if text-objects used as
+{motion}s, the selected object's start or end position will be considered as
+cursor positions.
+If used as the first motion, the start of the object position will be taken.
+If used as the second motion, the end of the object position will be taken.
+
+For example, an asterisk (*) is used to denote the cursor position and (^)
+indicates the selected texts:
+>
+  ./runtime/doc/mo*tion.txt
+>
+"vimiwf." will select:
+>
+  ./runtime/doc/motion.txt
+                ^^^^^^^
+<
+"vimf.iw" will select:
+>
+  ./runtime/doc/motion.txt
+                      ^^^^
 
 ==============================================================================
 INTERFACE				*textobj-motionmotion-interface*
@@ -77,7 +104,7 @@ command doesn't override existing {lhs}s unless [!] is given.
 ==============================================================================
 BUGS					*textobj-motionmotion-bugs*
 
-- Text objects, */* ,*?* ,*:* and *Q_ta* are not supported. Supposed to be
+- */* ,*?* ,*:* and *Q_ta* are not supported. Supposed to be
   much more fetures missing.
 
 - No mapped commands are supported.
