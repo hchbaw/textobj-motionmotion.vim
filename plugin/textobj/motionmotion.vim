@@ -1,5 +1,5 @@
 " textobj-motionmotion - Text objects for bounds of 2 motions
-" Version: 0.0.2
+" Version: 0.0.2.1
 " Author: Takeshi Banse <takebi@laafc.net>
 " Licence: Public Domain
 
