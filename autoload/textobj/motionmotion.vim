@@ -21,7 +21,6 @@ function! s:loop(c, acc, m1, sk)
 endfunction
 
 " basically just dumped out the quickref.txt
-" TODO: text objects
 " TODO: /?
 " TODO: mapped motions
 " TODO: :

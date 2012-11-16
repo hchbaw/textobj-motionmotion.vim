@@ -1,7 +1,8 @@
 *textobj-motionmotion.txt*	Text objects for bounds of 2 motions
 
-Author:  Takeshi Banse <takebi@laafc.net>
+Author: Takeshi Banse <takebi@laafc.net>
 Version: 0.0.2
+Script ID: 4304
 Licence: Public Domain
 
 CONTENTS				*textobj-motionmotion-contents*
@@ -57,18 +58,18 @@ If used as the second motion, the end of the object position will be taken.
 For example, an asterisk (*) is used to denote the cursor position and (^)
 indicates the selected texts:
 >
-  ./runtime/doc/mo*tion.txt
->
-"vimiwf." will select:
->
-  ./runtime/doc/motion.txt
-                ^^^^^^^
+  te*xt_objects
 <
-"vimf.iw" will select:
+"vimiwf_" will select:
 >
-  ./runtime/doc/motion.txt
-                      ^^^^
-
+  text_objects
+  ^^^^^
+<
+"vimf_iw" will select:
+>
+  text_objects
+      ^^^^^^^^
+<
 ==============================================================================
 INTERFACE				*textobj-motionmotion-interface*
 

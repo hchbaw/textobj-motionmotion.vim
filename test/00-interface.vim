@@ -10,7 +10,6 @@ for n in ['<Plug>(textobj-motionmotion-a)', '<Plug>(textobj-motionmotion-i)']
   Ok maparg(n,'v')!=''
 endfor
 
-
 enew!
 put ='./runtime/doc/motion.txt'
 
@@ -25,3 +24,15 @@ Ok @0==#'/doc/' 'select-i'
 normal! 16|
 normal yim3bt.
 Ok @0==#'doc/motion' 'doc sample'
+
+
+enew!
+put ='text_objects'
+
+normal! 2|
+normal yimiwf_
+Ok @0==#'text_' 'doc sample text-objects i'
+
+normal! 2|
+normal yimf_iw
+Ok @0==#'_objects' 'doc sample text-objects a'
