@@ -31,11 +31,11 @@ For example, an asterisk (*) is used to denote the cursor position:
             ^^^^^^^^^^
 <
 Roughly speaking, this plugin makes an operator such that ["^x]c{motion} to
-be able to respond ["x]cim{motion}{motion} (*im* is the default key mapping).
+be able to respond ["x]cim{motion}{motion} (|im| is the default key mapping).
 Hence the name "motionmotion" has been derived from.
 
-Note that this plugin is far from complete. Please use *[range]* or
-*Visual-mode* in the real world!
+Note that this plugin is far from complete. Please use |[range]| or
+|Visual-mode| in the real world!
 
 Requirements:
 - Vim 7.2 or later
@@ -105,7 +105,7 @@ command doesn't override existing {lhs}s unless [!] is given.
 ==============================================================================
 BUGS					*textobj-motionmotion-bugs*
 
-- */* ,*?* ,*:* and *Q_ta* are not supported. Supposed to be
+- |/| ,|?| ,|:| and |Q_ta| are not supported. Supposed to be
   much more fetures missing.
 
 - No mapped commands are supported.
